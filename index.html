@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>Dialog</title>
+  </head>
+  <body>
+    <button type="button" id="srcBtn">Source Folder</button>
+    Folder path: <strong id="srcPath"></strong> <br> <br>
+    <button type="button" id="destBtn">Destination Folder</button>
+    Folder path: <strong id="destPath"></strong> <br> <br>
+    <button type="button" id="subBtn">Submit</button>
+    <script src='./renderer.js'></script>
+  </body>
+</html>

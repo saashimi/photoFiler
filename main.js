@@ -34,9 +34,9 @@ async function handleCopyFiles (event, copyFrom, copyTo) {
             // Now copy async
             if ( stat.isFile() ) {
                 const birthTime = stat.birthtime
-                //console.log( "File '%s' was created on %s", stat, birthTime);
+                
+                // TODO: instead of relying on birthtime, extract the EXIF data
                 let dateTimeString = birthTime.toString().split(" ");
-                //console.log(dateTimeString);
                 
                 const months = {Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
                                 Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12',}
@@ -46,20 +46,22 @@ async function handleCopyFiles (event, copyFrom, copyTo) {
                 let month = months[dateTimeString[1]]
                 let day = dateTimeString[2]
                 const folder = `${year}\-${month}\-${day}`
-                const toPath = path.join( copyTo, folder, file );
-                //TODO first check if folder exists, if not, create file
-                if (!fs.existsSync(path.join(copyTo, folder))){
-                    fs.mkdirSync(path.join(copyTo, folder))
+                const toPath = path.join( copyTo, year, folder, file );
+                
+                // Create year folder
+                if (!fs.existsSync(path.join(copyTo, year))) {
+                    fs.mkdirSync(path.join(copyTo, year))
+                }
+                // Create date folder and copy files
+                if (!fs.existsSync(path.join(copyTo, year, folder))){
+                    fs.mkdirSync(path.join(copyTo, year, folder))
                     await fs.promises.copyFile( fromPath, toPath );
 
                 } else {
                     await fs.promises.copyFile( fromPath, toPath );
                 }
                 console.log( "Copied '%s'->'%s'", fromPath, toPath );
-
             } 
-
-            // Log because we're crazy
         } // End for...of
     }
     catch( e ) {

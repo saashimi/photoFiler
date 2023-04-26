@@ -6,7 +6,7 @@ async function handleDirOpen() {
     const { canceled, filePaths } = await dialog.showOpenDialog(
         { properties: ['openDirectory']})
     if (canceled) {
-        return
+        return "Directory is not selected."
     } else {
         return filePaths[0]
     }
@@ -15,7 +15,7 @@ async function handleDirOpen() {
 async function handleCopyFiles (event, copyFrom, copyTo) {
     const win = BrowserWindow.getFocusedWindow()
     win.setProgressBar(0)
-    // Our starting point
+    
     try {
         // Get the files as an array
         const files = await fs.promises.readdir( copyFrom );
@@ -42,7 +42,7 @@ async function handleCopyFiles (event, copyFrom, copyTo) {
                 let dateTimeString = birthTime.toString().split(" ");
                 
                 const months = {Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
-                                Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12',}
+                                Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12'}
                 
                 //TODO: why can't this be destructured?
                 let year = dateTimeString[3]
@@ -55,12 +55,13 @@ async function handleCopyFiles (event, copyFrom, copyTo) {
                 if (!fs.existsSync(path.join( copyTo, year ))) {
                     fs.mkdirSync(path.join( copyTo, year ))
                 }
-                // Create date folder and copy files
+                // Create date folder if does not exist and copy files
                 if (!fs.existsSync(path.join( copyTo, year, folder ))){
                     fs.mkdirSync(path.join( copyTo, year, folder ))
                     await fs.promises.copyFile( fromPath, toPath );
 
                 } else {
+                    // Copy files if destination folders exist
                     await fs.promises.copyFile( fromPath, toPath );
                 }
                 console.log( "Copied '%s'->'%s'", fromPath, toPath );
@@ -68,6 +69,8 @@ async function handleCopyFiles (event, copyFrom, copyTo) {
                 if (incr <= .99) {
                     win.setProgressBar(incr)
                 } else {
+                    // Set a delay so completion is more visible
+                    win.setProgressBar(incr += 1000)
                     win.setProgressBar(-1)
                 }
 

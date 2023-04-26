@@ -13,10 +13,13 @@ async function handleDirOpen() {
 }
 
 async function handleCopyFiles (event, copyFrom, copyTo) {
+    const win = BrowserWindow.getFocusedWindow()
+    win.setProgressBar(0)
     // Our starting point
     try {
         // Get the files as an array
         const files = await fs.promises.readdir( copyFrom );
+        let incr = files.length / 100
 
         // Loop them all with the new for...of
         for( const file of files ) {            
@@ -49,18 +52,25 @@ async function handleCopyFiles (event, copyFrom, copyTo) {
                 const toPath = path.join( copyTo, year, folder, file );
                 
                 // Create year folder
-                if (!fs.existsSync(path.join(copyTo, year))) {
-                    fs.mkdirSync(path.join(copyTo, year))
+                if (!fs.existsSync(path.join( copyTo, year ))) {
+                    fs.mkdirSync(path.join( copyTo, year ))
                 }
                 // Create date folder and copy files
-                if (!fs.existsSync(path.join(copyTo, year, folder))){
-                    fs.mkdirSync(path.join(copyTo, year, folder))
+                if (!fs.existsSync(path.join( copyTo, year, folder ))){
+                    fs.mkdirSync(path.join( copyTo, year, folder ))
                     await fs.promises.copyFile( fromPath, toPath );
 
                 } else {
                     await fs.promises.copyFile( fromPath, toPath );
                 }
                 console.log( "Copied '%s'->'%s'", fromPath, toPath );
+                incr += incr
+                if (incr <= .99) {
+                    win.setProgressBar(incr)
+                } else {
+                    win.setProgressBar(-1)
+                }
+
             } 
         } // End for...of
     }

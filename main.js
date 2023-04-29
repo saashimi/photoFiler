@@ -53,6 +53,7 @@ async function handleCopyFiles (event, copyFrom, copyTo) {
             fileExt = fileExt.slice(-1)[0].toLowerCase();
 
             if (IMG_FORMATS.includes(`.${fileExt}`)) {
+
                 const stat = await fs.promises.stat( file );
                 const birthTime = stat.birthtime;
                 
@@ -70,33 +71,33 @@ async function handleCopyFiles (event, copyFrom, copyTo) {
                 let filename = path.parse(file).base;
                 const toPath = path.join( copyTo, year, folder, filename);
                 
-                // Create year folder
-                if (!fs.existsSync(path.join( copyTo, year ))) {
-                    fs.mkdirSync(path.join( copyTo, year ));
-                };
-                // Create date folder if does not exist and copy files
-                if (!fs.existsSync(path.join( copyTo, year, folder ))){
-                    fs.mkdirSync(path.join( copyTo, year, folder ));
-                    await fs.promises.copyFile( file, toPath );
+                // If file does not already exist in dest
+                if (!fs.existsSync( toPath )) {
 
-                } else {
-                    // Copy files if destination folders exist
+                    // Create year folder
+                    if (!fs.existsSync(path.join( copyTo, year ))) {
+                        fs.mkdirSync(path.join( copyTo, year ));
+                    };
+                    // Create date folder if does not exist
+                    if (!fs.existsSync(path.join( copyTo, year, folder ))){
+                        fs.mkdirSync(path.join( copyTo, year, folder ));
+                    };
                     await fs.promises.copyFile( file, toPath );
-                };
-                console.log( "Copied '%s'->'%s'", file, toPath );
-                copied += 1;
-                incr += incr;
-                if (incr <= .99) {
-                    win.setProgressBar(incr);
-                } else {
-                    // Set a delay so completion is more visible
-                    win.setProgressBar(incr += 1000);
-                    win.setProgressBar(-1);
+                    console.log( "Copied '%s'->'%s'", file, toPath );
+                    copied += 1;
+                    incr += incr;
+                    if (incr <= .99) {
+                        win.setProgressBar(incr);
+                    } else {
+                        // Set a delay so completion is more visible
+                        win.setProgressBar(incr += 1000);
+                        win.setProgressBar(-1);
+                    };
                 };
             } else {
-                // Skip if not an image file
+            // Skip if not an image file
                 continue;
-            }
+            };
         }; // End for...of
         return copied;
     }

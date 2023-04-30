@@ -56,20 +56,15 @@ async function handleCopyFiles (event, copyFrom, copyTo) {
 
                 const stat = await fs.promises.stat( file );
                 const birthTime = stat.birthtime;
-                
-                // TODO: instead of relying on birthtime, extract the EXIF data
                 let dateTimeString = birthTime.toString().split(" ");
                 
                 const months = {Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
                                 Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12'};
                 
-                //TODO: why can't this be destructured?
-                let year = dateTimeString[3];
-                let month = months[dateTimeString[1]];
-                let day = dateTimeString[2];
-                const folder = `${year}\-${month}\-${day}`;
+                let [year, month, day] =  [dateTimeString[3], months[dateTimeString[1]], dateTimeString[2]];
+                let folder = `${year}\-${month}\-${day}`;
                 let filename = path.parse(file).base;
-                const toPath = path.join( copyTo, year, folder, filename);
+                let toPath = path.join( copyTo, year, folder, filename);
                 
                 // If file does not already exist in dest
                 if (!fs.existsSync( toPath )) {

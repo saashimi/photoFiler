@@ -19,9 +19,9 @@ destBtn.addEventListener('click', async () => {
 subBtn.addEventListener('click', async () => {
   const msg = await window.electronAPI.copyFiles(srcPathElement.value, destPathElement.value);
   if (typeof msg === "number") {
-    msgElement.value = `Copied ${msg} files`;
+    msgElement.innerHTML = `Copied ${msg} files`;
   } else {
-    msgElement.value = `${msg}`;
+    msgElement.innerHTML = `${msg}`;
   }
 });
 

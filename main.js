@@ -43,7 +43,7 @@ async function handleCopyFiles (event, copyFrom, copyTo) {
     
     try {
         // Get the files as an array
-        const files = await getFiles( copyFrom );
+        let files = await getFiles( copyFrom );
         let incr = files.length / 100;
         let copied = 0;
 
@@ -54,11 +54,11 @@ async function handleCopyFiles (event, copyFrom, copyTo) {
 
             if (IMG_FORMATS.includes(`.${fileExt}`)) {
 
-                const stat = await fs.promises.stat( file );
-                const birthTime = stat.birthtime;
+                let stat = await fs.promises.stat( file );
+                let birthTime = stat.birthtime;
                 let dateTimeString = birthTime.toString().split(" ");
                 
-                const months = {Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
+                let months = {Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
                                 Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12'};
                 
                 let [year, month, day] =  [dateTimeString[3], months[dateTimeString[1]], dateTimeString[2]];

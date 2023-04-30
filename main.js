@@ -96,6 +96,8 @@ async function handleCopyFiles (event, copyFrom, copyTo) {
                 };
             } else {
             // Skip if not an image file
+                incr += incr;
+                win.setProgressBar(incr);
                 continue;
             };
         }; // End for...of
@@ -103,6 +105,7 @@ async function handleCopyFiles (event, copyFrom, copyTo) {
     }
     catch( e ) {
         // Catch anything bad that happens
+        win.setProgressBar(-1);
         return e;
     };
 };

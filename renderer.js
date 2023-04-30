@@ -8,20 +8,20 @@ const msgElement = document.getElementById('successFail');
 
 srcBtn.addEventListener('click', async () => {
   const srcPath = await window.electronAPI.openDirectory();
-  srcPathElement.innerText = srcPath;
+  srcPathElement.value = srcPath;
 });
 
 destBtn.addEventListener('click', async () => {
   const destPath = await window.electronAPI.openDirectory();
-  destPathElement.innerText = destPath;
+  destPathElement.value = destPath;
 });
 
 subBtn.addEventListener('click', async () => {
-  const msg = await window.electronAPI.copyFiles(srcPathElement.innerText, destPathElement.innerText);
+  const msg = await window.electronAPI.copyFiles(srcPathElement.value, destPathElement.value);
   if (typeof msg === "number") {
-    msgElement.innerText = `Copied ${msg} files`;
+    msgElement.value = `Copied ${msg} files`;
   } else {
-    msgElement.innerText = `${msg}`;
+    msgElement.value = `${msg}`;
   }
 });
 

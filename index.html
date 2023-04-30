@@ -4,15 +4,70 @@
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./node_modules/bulma/css/bulma.css">
     <title>📷 Photo 🗄️ Filer</title>
   </head>
   <body>
-    <button type="button" id="srcBtn">Source Folder</button>
-    Folder path: <strong id="srcPath"></strong> <br> <br>
-    <button type="button" id="destBtn">Destination Folder</button>
-    Folder path: <strong id="destPath"></strong> <br> <br>
-    <button type="button" id="subBtn">Submit</button>
-    Folder path: <strong id="successFail"></strong>
-    <script src='./renderer.js'></script>
+
+    <div class="container">
+      <div class="notification is-dark">
+      
+        <div class="block">
+          <div class="field is-horizontal">
+            <div class="field-body">
+              <div class="field has-addons">
+                <div class="control">
+                  <a class="button is-info" id="srcBtn">
+                    Browse
+                  </a>
+                </div>
+                <div class="control is-expanded">
+                  <input class="input" type="text" placeholder="Select source directory" id="srcPath">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+
+          <div class="field is-horizontal">
+            <div class="field-body">
+              <div class="field has-addons">
+                <div class="control">
+                  <a class="button is-link" id="destBtn">
+                    Browse
+                  </a>
+                </div>
+                <div class="control is-expanded">
+                  <input class="input" type="text" placeholder="Select destination directory" id="destPath">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+
+          <div class="field is-horizontal">
+            <div class="field-body">
+              <div class="field has-addons">
+                <div class="control">
+                  <a class="button is-warning" id="subBtn">
+                    Submit
+                  </a>
+                </div>
+                <div class="control is-expanded">
+                  <input class="input" type="text" placeholder="Status:" id="successFail" disabled>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+    <script defer src='./renderer.js'></script>
   </body>
 </html>

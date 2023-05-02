@@ -18,6 +18,7 @@ destBtn.addEventListener('click', async () => {
 
 subBtn.addEventListener('click', async () => {
   subBtn.setAttribute("class", "button is-warning is-loading");
+  msgElement.innerHTML = "Copying files ... "
   const msg = await window.electronAPI.copyFiles(srcPathElement.value, destPathElement.value);
   subBtn.setAttribute("class", "button is-warning");
   if (typeof msg === "number") {

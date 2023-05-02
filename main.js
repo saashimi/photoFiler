@@ -76,6 +76,7 @@ async function handleCopyFiles (event, copyFrom, copyTo) {
                         fs.mkdirSync(path.join( copyTo, year, folder ));
                     };
                     await fs.promises.copyFile( file, toPath );
+                    copied += 1
                     console.log( "Copied '%s'->'%s'", file, toPath );
                 };
             } else {

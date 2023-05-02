@@ -4,13 +4,15 @@
   "description": "Import photos and organize by date",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icons8-cameras-128.icns --prune=true --out=release-builds"
   },
   "author": "Kevin Saavedra",
   "license": "ISC",
   "devDependencies": {
     "bulma": "^0.9.4",
     "bulma-start": "^0.0.5",
-    "electron": "^24.1.2"
+    "electron": "^24.1.2",
+    "electron-packager": "^17.1.1"
   }
 }

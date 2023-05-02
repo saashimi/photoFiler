@@ -31,7 +31,6 @@ const getFiles = function(dirPath, fileArray) {
       if (fs.statSync(dirPath + "/" + file).isDirectory()) {
         fileArray =  getFiles(dirPath + "/" + file, fileArray);
       } else {
-        console.log(fileArray)
         fileArray.push(path.join(dirPath, "/", file));
       };
     });
@@ -40,12 +39,10 @@ const getFiles = function(dirPath, fileArray) {
 
 async function handleCopyFiles (event, copyFrom, copyTo) {
     const win = BrowserWindow.getFocusedWindow();
-    win.setProgressBar(0);
     
     try {
         // Get the files as an array
         let files = await getFiles( copyFrom );
-        let incr = files.length / 100;
         let copied = 0;
 
         for( const file of files ) {            
@@ -80,25 +77,16 @@ async function handleCopyFiles (event, copyFrom, copyTo) {
                     };
                     await fs.promises.copyFile( file, toPath );
                     console.log( "Copied '%s'->'%s'", file, toPath );
-                    copied += 1;
-                    incr += incr;
-                    win.setProgressBar(incr);
                 };
             } else {
-            // Skip if not an image file
-                incr += incr;
-                win.setProgressBar(incr);
+                // Skip if not an image file
                 continue;
             };
         }; // End for...of
-        // Set a delay so completion is more visible
-        win.setProgressBar(incr += 1000);
-        win.setProgressBar(-1);
         return copied;
     }
     catch( e ) {
         // Catch anything bad that happens
-        win.setProgressBar(-1);
         return e;
     };
 };

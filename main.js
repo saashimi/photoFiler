@@ -22,15 +22,16 @@ async function handleDirOpen() {
     };
 };
 
-const getFiles = async function(dirPath, fileArray) {
+const getFiles = function(dirPath, fileArray) {
     // recursively loop through folders and get file paths
     files = fs.readdirSync(dirPath);
     fileArray = fileArray || [];
   
     files.forEach(function(file) {
       if (fs.statSync(dirPath + "/" + file).isDirectory()) {
-        fileArray = getFiles(dirPath + "/" + file, fileArray);
+        fileArray =  getFiles(dirPath + "/" + file, fileArray);
       } else {
+        console.log(fileArray)
         fileArray.push(path.join(dirPath, "/", file));
       };
     });
@@ -81,13 +82,7 @@ async function handleCopyFiles (event, copyFrom, copyTo) {
                     console.log( "Copied '%s'->'%s'", file, toPath );
                     copied += 1;
                     incr += incr;
-                    if (incr <= .99) {
-                        win.setProgressBar(incr);
-                    } else {
-                        // Set a delay so completion is more visible
-                        win.setProgressBar(incr += 1000);
-                        win.setProgressBar(-1);
-                    };
+                    win.setProgressBar(incr);
                 };
             } else {
             // Skip if not an image file
@@ -96,6 +91,9 @@ async function handleCopyFiles (event, copyFrom, copyTo) {
                 continue;
             };
         }; // End for...of
+        // Set a delay so completion is more visible
+        win.setProgressBar(incr += 1000);
+        win.setProgressBar(-1);
         return copied;
     }
     catch( e ) {

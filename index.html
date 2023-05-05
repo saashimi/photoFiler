@@ -9,71 +9,69 @@
     <title>📷 Photo 🗄️ Filer</title>
   </head>
   <body>
-
-    <!--<div class="container">-->
-    <section class="hero is-small is-dark">
-      <div class="hero-body">
-
-        <div class="notification is-dark">
-        
-          <div class="block">
-            <div class="field is-horizontal">
-              <div class="field-body">
-                <div class="field has-addons">
-                  <div class="control">
-                    <a class="button is-info" id="srcBtn">
-                      Browse
-                    </a>
-                  </div>
-                  <div class="control is-expanded">
-                    <input class="input" type="text" placeholder="Select source directory" id="srcPath">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="block">
-
-            <div class="field is-horizontal">
-              <div class="field-body">
-                <div class="field has-addons">
-                  <div class="control">
-                    <a class="button is-link" id="destBtn">
-                      Browse
-                    </a>
-                  </div>
-                  <div class="control is-expanded">
-                    <input class="input" type="text" placeholder="Select destination directory" id="destPath">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="block">
-          
-            <nav class="level">
-              <div class="level-left">
-                <div class="level-item">
-                  <p class="control">
-                    <button class="button is-warning" id="subBtn">
-                      Submit
-                    </button>
-                  </p>
-                </div>
-                <div class="level-item">
-                  <p class="subtitle is-5" id="successFail"></p>
-                </div>
-              </div>
-            </nav>
-          
-          </div>
-        
-        </div>
+  <section class="hero is-dark is-fullheight">
+    <div class="hero-head"> 
     </div>
-    </section>
-    <!--</div>-->
-    <script defer src='./renderer.js'></script>
+      
+      <div class="hero-body">
+      <div class="container">
+
+        <div class="block">
+          <div class="field is-horizontal">
+            <div class="field-body">
+              <div class="field has-addons">
+                <div class="control">
+                  <a class="button is-info" id="srcBtn">
+                    Browse
+                  </a>
+                </div>
+                <div class="control is-expanded">
+                  <input class="input" type="text" placeholder="Select source directory" id="srcPath">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="field is-horizontal">
+            <div class="field-body">
+              <div class="field has-addons">
+                <div class="control">
+                  <a class="button is-link" id="destBtn">
+                    Browse
+                  </a>
+                </div>
+                <div class="control is-expanded">
+                  <input class="input" type="text" placeholder="Select destination directory" id="destPath">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>    
+        
+        <div class="block">
+            <div class="level-left">
+              <div class="level-item">
+                <p class="control">
+                  <button class="button is-warning" id="subBtn">
+                    Submit
+                  </button>
+                </p>
+              </div>
+              <div class="level-item">
+                <p class="subtitle is-5" id="successFail"></p>
+              </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="hero-foot">
+      
+    </div> 
+           
+  </section>
+  <script defer src='./renderer.js'></script>
   </body>
 </html>

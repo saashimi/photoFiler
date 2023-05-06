@@ -94,8 +94,8 @@ async function handleCopyFiles (event, copyFrom, copyTo) {
 
 function createWindow () {
     const mainWindow = new BrowserWindow({
-        width: 800, 
-        height: 300,
+        width: 780, 
+        height: 400,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }

@@ -57,7 +57,7 @@ async function handleCopyFiles (event, copyFrom, copyTo) {
                 let dateTimeString = birthTime.toString().split(" ");
                 
                 let months = {Jan: '01', Feb: '02', Mar: '03', Apr: '04', May: '05', Jun: '06',
-                                Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12'};
+                              Jul: '07', Aug: '08', Sep: '09', Oct: '10', Nov: '11', Dec: '12'};
                 
                 let [year, month, day] =  [dateTimeString[3], months[dateTimeString[1]], dateTimeString[2]];
                 let folder = `${year}\-${month}\-${day}`;

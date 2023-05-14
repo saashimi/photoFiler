@@ -11,8 +11,11 @@
   "author": "Kevin Saavedra",
   "license": "ISC",
   "devDependencies": {
+    "assert": "^2.0.0",
     "electron": "^24.1.2",
-    "electron-packager": "^17.1.1"
+    "electron-chromedriver": "^24.0.0",
+    "electron-packager": "^17.1.1",
+    "selenium-webdriver": "^4.9.2"
   },
   "dependencies": {
     "bulma": "^0.9.4"

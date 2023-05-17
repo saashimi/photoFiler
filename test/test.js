@@ -23,24 +23,19 @@ suite(function (env) {
       after(async () => await driver.quit());
   
       it('Check Initialized', async function () {  
-        await driver.manage().setTimeouts({implicit: 10000});
         let title = await driver.getTitle();
         assert.equal("📷 Photo 🗄️ Filer", title);
       });
 
       it("Source directory Input Box initial state", async function() {
-        await driver.manage().setTimeouts({implicit: 10000});
         let sourceText = await driver.findElement(By.id('srcPath'))
         .getAttribute("placeholder");
-        //let value = await sourceText.getText();
         assert.equal(sourceText, "Select source directory");
       });
 
       it("Destination directory Input Box initial state", async function() {
-        await driver.manage().setTimeouts({implicit: 10000});
         let destText = await driver.findElement(By.id('destPath'))
         .getAttribute("placeholder");
-        //let value = await destText.getText();
         assert.equal(destText, "Select destination directory");
       });
 

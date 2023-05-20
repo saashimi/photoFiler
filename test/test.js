@@ -4,6 +4,7 @@ const assert = require("assert")
 
 suite(function (env) {
     describe('First script', function () {
+      this.timeout(10000)
       let driver;
       
       before(async function () {

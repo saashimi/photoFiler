@@ -22,7 +22,7 @@ suite(function (env) {
   
       after(async () => await driver.quit());
   
-      it('Check Initialized', async function () {  
+      it('Check Initialized', async function() {  
         let title = await driver.getTitle();
         assert.equal("📷 Photo 🗄️ Filer", title);
       });

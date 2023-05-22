@@ -1,9 +1,9 @@
-const {By, Builder, Browser} = require('selenium-webdriver');
+const {By, Builder, Browser, Key} = require('selenium-webdriver');
 const {suite} = require("selenium-webdriver/testing")
 const assert = require("assert")
 
 suite(function (env) {
-    describe('First script', function () {
+    describe('photoFiler tests', function () {
       this.timeout(10000)
       let driver;
       
@@ -38,6 +38,24 @@ suite(function (env) {
         let destText = await driver.findElement(By.id('destPath'))
         .getAttribute("placeholder");
         assert.equal(destText, "Select destination directory");
+      });
+      
+      it("Can enter text into src field", async function() {
+        let sourceText = await driver.findElement(By.id('srcPath'))
+        await driver.actions()
+        .sendKeys(sourceText, '/Users/test')
+        .pause(500)
+        .keyDown(Key.COMMAND)
+        .sendKeys(sourceText, 'a')
+        .pause(500)
+        .keyUp(Key.COMMAND)
+        .pause(500)
+        .keyDown(Key.DELETE)
+        .pause(500)
+        .keyUp(Key.DELETE)
+        .perform()
+        let val = await sourceText.getAttribute('placeholder')
+        assert.equal(val, "Select source directory");
       });
 
     });

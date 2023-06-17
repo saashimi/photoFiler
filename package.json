@@ -1,12 +1,13 @@
 {
-  "name": "photofiler",
+  "name": "photoFiler",
   "version": "1.0.0",
   "description": "Import photos and organize by date",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icons8-cameras-128.icns --prune=true --out=release-builds",
-    "package-win": "electron-packager . photoFiler --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icons8-cameras-128.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"photoFiler\""
+    "package-win": "electron-packager . photoFiler --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icons8-cameras-128.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"photoFiler\"",
+    "package-linux": "electron-packager . photoFiler --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/linux/icons8-cameras-128.png --prune=true --out=release-builds"
   },
   "author": "Kevin Saavedra",
   "license": "ISC",
